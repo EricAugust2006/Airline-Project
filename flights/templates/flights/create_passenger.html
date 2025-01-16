@@ -1,0 +1,30 @@
+{% extends "flights/layout.html" %} 
+{% block body %}
+
+{% if message %}
+<div class="alert alert-danger">{{message}}</div>
+{% endif %}
+
+<h1>Adicionar Novo Passageiro</h1>
+
+<form action="{% url 'flights:create_passenger' %}" method="post">
+    {% csrf_token %}
+    
+    {% if flight_id %}
+    <input type="hidden" name="flight_id" value="{{ flight_id }}">
+    {% endif %}
+    
+    <div class="form-group">
+        <input type="text" name="first" placeholder="Nome" class="form-control">
+    </div>
+    
+    <div class="form-group">
+        <input type="text" name="last" placeholder="Sobrenome" class="form-control">
+    </div>
+    
+    <input type="submit" value="Adicionar Passageiro" class="btn btn-primary">
+</form>
+
+<a href="{% url 'flights:index' %}">Voltar para Lista de Voos</a>
+
+{% endblock %}
